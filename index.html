@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>PresenTs | Corte y Grabado Láser Personalizado</title>
+    <meta name="description" content="Especialistas en corte y grabado láser. Regalos únicos, arte personalizado y señalética en madera y acrílico.">
+    <link rel="canonical" href="https://tudominio.com/">
+
+    <style>
+        :root {
+            --primary: #ff6b35;
+            --dark: #1d1d1f;
+            --gray: #86868b;
+            --light: #f5f5f7;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container { text-decoration: none; cursor: pointer; }
+        .logo-text { font-size: 1.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .logo-text span { color: var(--dark); }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* PÁGINAS */
+        .page { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 5%; }
+
+        /* GRID DE PROYECTOS (HOME) */
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card-img { height: 240px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: var(--light); }
+        .card-body { padding: 1.5rem; }
+
+        /* GRID DE GALERÍA (3 COLUMNAS + FEATURED) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Móvil: 1 columna */
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); } /* Tablet: 2 columnas */
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); } /* PC: 3 columnas */
+            
+            /* El item destacado ocupa las 3 columnas en PC */
+            .gallery-item.featured {
+                grid-column: span 3;
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                background: linear-gradient(to right, #ffffff, #fff5f2);
+                border: 2px solid var(--primary);
+            }
+            .gallery-item.featured .item-icon { font-size: 5rem; min-width: 150px; }
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .gallery-item h4 { font-size: 1.4rem; margin: 1rem 0; }
+        
+        .wa-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .wa-btn:hover { background: #128C7E; transform: scale(1.05); }
+
+        /* CONTACTO Y SEGURIDAD */
+        .contact-section { background: var(--light); padding: 5rem 0; }
+        .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; }
+        .form-card { background: var(--white); padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #d2d2d7; border-radius: 12px; }
+        .btn-submit { width: 100%; padding: 1rem; background: var(--dark); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; }
+
+        footer { text-align: center; padding: 4rem 0; color: var(--gray); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a onclick="showPage('home')" class="logo-container">
+                <h1 class="logo-text">Presen<span>Ts</span></h1>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#proyectos" onclick="showPage('home')">Proyectos</a></li>
+                <li><a href="#contacto" onclick="showPage('home')">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="homePage" class="page active">
+        <section class="container" id="proyectos">
+            <div class="section-header">
+                <h2>Corte y Grabado Láser</h2>
+                <p>Selecciona una categoría para ver nuestros trabajos.</p>
+            </div>
+
+            <div class="projects-grid">
+                <article class="card" onclick="showGallery('arte')">
+                    <div class="card-img">🎨</div>
+                    <div class="card-body">
+                        <h3>Arte y Cuadros</h3>
+                        <p>Diseños geométricos y retratos grabados en madera.</p>
+                    </div>
+                </article>
+
+                <article class="card" onclick="showGallery('regalos')">
+                    <div class="card-img">🎁</div>
+                    <div class="card-body">
+                        <h3>Regalos Únicos</h3>
+                        <p>Personalización de detalles para momentos especiales.</p>
+                    </div>
+                </article>
+
+                <article class="card" onclick="showGallery('corporativo')">
+                    <div class="card-img">🏢</div>
+                    <div class="card-body">
+                        <h3>Corporativo</h3>
+                        <p>Señalética y branding profesional para tu empresa.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contacto">
+            <div class="container contact-wrapper">
+                <div>
+                    <h2>Contáctanos</h2>
+                    <p style="margin: 1rem 0; color: var(--gray);">Protegemos tu privacidad. Tus datos están seguros.</p>
+                    <div id="safeContacts"></div>
+                </div>
+
+                <div class="form-card">
+                    <form id="contactForm" onsubmit="handleSecureSubmit(event)">
+                        <div style="display:none;"><input type="text" id="hp_field"></div>
+                        
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mensaje</label>
+                            <textarea id="msg" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn-submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="galleryPage" class="page">
+        <div class="container">
+            <span onclick="showPage('home')" style="cursor:pointer; color:var(--primary); font-weight:700;">← VOLVER</span>
+            <div class="section-header" style="margin-top:2rem;">
+                <h2 id="galleryTitle"></h2>
+                <p id="galleryDesc"></p>
+            </div>
+            <div class="gallery-grid" id="galleryContainer"></div>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 PresenTs - Calidad Láser</p></footer>
+
+    <script>
+        const loadTime = Date.now();
+
+        const content = {
+            arte: {
+                title: "Arte y Cuadros",
+                desc: "Piezas decorativas de alta precisión.",
+                items: [
+                    { n: "Mapa de Ciudad", p: "$45", i: "🗺️" },
+                    { n: "Retrato en Madera", p: "$60", i: "🖼️" },
+                    { n: "Mandala Calado", p: "$35", i: "🌀" },
+                    { n: "Proyecto Especial de Arte", p: "A medida", i: "✨", featured: true }
+                ]
+            },
+            regalos: {
+                title: "Regalos Únicos",
+                desc: "Detalles que cuentan una historia.",
+                items: [
+                    { n: "Llavero de Cuero", p: "$12", i: "🔑" },
+                    { n: "Caja de Té", p: "$25", i: "🍵" },
+                    { n: "Álbum Grabado", p: "$40", i: "📸" },
+                    { n: "Idea de Regalo Personalizada", p: "Cotizar", i: "💡", featured: true }
+                ]
+            },
+            corporativo: {
+                title: "Soluciones Corporativas",
+                desc: "Imagen profesional para tu marca.",
+                items: [
+                    { n: "Placa de Oficina", p: "$50", i: "🏷️" },
+                    { n: "Logo 3D Pared", p: "$120", i: "🏢" },
+                    { n: "Sellos Personalizados", p: "$20", i: "🖋️" },
+                    { n: "Proyecto Corporativo Integral", p: "Presupuesto", i: "🚀", featured: true }
+                ]
+            }
+        };
+
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id + 'Page').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showGallery(cat) {
+            const data = content[cat];
+            document.getElementById('galleryTitle').innerText = data.title;
+            document.getElementById('galleryDesc').innerText = data.desc;
+            
+            const container = document.getElementById('galleryContainer');
+            container.innerHTML = "";
+
+            data.items.forEach(item => {
+                const isFeatured = item.featured ? 'featured' : '';
+                const waLink = `https://wa.me/1234567890?text=${encodeURIComponent('Hola! Me interesa: ' + item.n)}`;
+                
+                container.innerHTML += `
+                    <div class="gallery-item ${isFeatured}">
+                        <div class="item-icon" style="font-size:3rem; text-align:center;">${item.i}</div>
+                        <div class="item-info">
+                            <h4>${item.n}</h4>
+                            <p style="color:var(--primary); font-weight:700;">${item.p}</p>
+                            <a href="${waLink}" target="_blank" class="wa-btn">Consultar WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+            });
+            showPage('gallery');
+        }
+
+        // SEGURIDAD OFUSCACIÓN
+        window.onload = () => {
+            document.getElementById('safeContacts').innerHTML = `
+                <p><strong>Email:</strong> info@presents.com</p>
+                <p><strong>WhatsApp:</strong> +123 456 7890</p>
+            `;
+        };
+
+        function handleSecureSubmit(e) {
+            e.preventDefault();
+            if (document.getElementById('hp_field').value !== "" || (Date.now() - loadTime) / 1000 < 3) return;
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Enviando...";
+            setTimeout(() => {
+                alert("Mensaje enviado correctamente.");
+                e.target.reset();
+                btn.disabled = false;
+                btn.innerText = "Enviar Mensaje";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
